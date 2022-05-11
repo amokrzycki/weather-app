@@ -50,19 +50,28 @@ class App extends Component {
               if (response.ok) {
                 return response;
               }
-              throw Error("Can't fetch weather")
+              throw Error("Can't fetch weather for: ")
             }
           )
           .then(response => response.json())
           .then(data => {
-            this.setState({
-              err: false
-            })
+            const requestDate = new Date().toLocaleString()
+            this.setState(actualState => ({
+              err: false,
+              date: requestDate,
+              sunrise: data.sys.sunrise,
+              sunset: data.sys.sunset,
+              temp: data.main.temp,
+              pressure: data.main.pressure,
+              wind: data.wind.speed,
+              city: actualState.value,
+            }))
           })
           .catch(err => {
-            this.setState({
-              err: true
-            })
+            this.setState(actualState => ({
+              err: true,
+              city: actualState.value,
+            }))
           })
       })
   }
@@ -70,7 +79,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Form value={this.state.value} change={this.handleInput} search={this.handleCitySearch} />
-        <Result />
+        <Result weather={this.state} />
       </div>
     )
   }
