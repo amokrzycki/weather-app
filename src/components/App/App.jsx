@@ -1,8 +1,8 @@
 import { Component } from "react";
 import "./App.css";
-import Form from "./Form";
-import Result from "./Result";
-import Header from "./Header";
+import Form from "../Form/Form";
+import Result from "../Result/Result";
+import Header from "../Header/Header";
 
 class App extends Component {
   // app state with all needed data to collect from API
@@ -88,13 +88,13 @@ class App extends Component {
     return (
       <div id="App" className="center">
         <Header />
-        <div id="wrapper" >
+        <div id="wrapper">
           <Form
             value={this.state.value}
             change={this.handleInput}
             search={this.handleCitySearch}
           />
-          <Result weather={this.state}/>
+          <Result weather={this.state} />
         </div>
       </div>
     );

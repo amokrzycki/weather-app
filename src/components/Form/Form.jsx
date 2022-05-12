@@ -10,7 +10,7 @@ const Form = (props) => {
         onChange={props.change}
         id="citySearch"
       ></input>
-      <button>Search cities</button>
+      <button>Get actual weather</button>
     </form>
   );
 };
