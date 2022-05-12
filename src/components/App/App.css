@@ -12,22 +12,3 @@
     transition: .3s;
     text-align: center;
 }
-
-#App button {
-    cursor: pointer;
-}
-
-#App button:hover {
-    background-color: gray;
-    color: white;
-    border-color: gray;
-}
-
-header {
-    width: 100vw;
-}
-
-.dark-mode {
-    background-color: black;
-    color: white;
-}

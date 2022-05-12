@@ -1,6 +1,6 @@
 import { Component } from "react";
 import "./App.css";
-import Form from "../Form/Form";
+import FormComponent from "../FormComponent/FormComponent";
 import Result from "../Result/Result";
 import Header from "../Header/Header";
 
@@ -16,6 +16,7 @@ class App extends Component {
     pressure: "",
     wind: "",
     err: false,
+    label: "Provide your City!",
   };
   // handler of changes in text input with id #citySearch
   handleInput = (event) => {
@@ -65,6 +66,7 @@ class App extends Component {
             // pass on fetched data from API to state of App
             this.setState((actualState) => ({
               err: false,
+              label: `Description of weather: ${data.weather[0].description}`,
               date: requestDate,
               sunrise: data.sys.sunrise,
               sunset: data.sys.sunset,
@@ -78,6 +80,7 @@ class App extends Component {
           .catch((err) => {
             console.log(err);
             this.setState((actualState) => ({
+              label: "Provide existing City!",
               err: true,
               city: actualState.value, // pass on city to tell user we don't have this city in our database
             }));
@@ -88,11 +91,13 @@ class App extends Component {
     return (
       <div id="App" className="center">
         <Header />
-        <div id="wrapper">
-          <Form
+        <div id="wrapper" className="w-25">
+          <FormComponent
             value={this.state.value}
             change={this.handleInput}
             search={this.handleCitySearch}
+            label={this.state.label}
+            labelChange={this.handleLabelChange}
           />
           <Result weather={this.state} />
         </div>

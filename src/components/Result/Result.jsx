@@ -1,6 +1,6 @@
 import React from "react";
 import "./Result.css";
-
+import { Alert, Card } from "react-bootstrap";
 const Result = (props) => {
   // destructuring weather props to easier get our properties
   const { date, city, sunrise, sunset, temp, pressure, wind, err } =
@@ -14,23 +14,30 @@ const Result = (props) => {
     const sunriseTime = new Date(sunrise * 1000).toLocaleTimeString(); // unix time sended by API have lack of three zeros, we need to multiplicate it by 1000
     const sunsetTime = new Date(sunset * 1000).toLocaleTimeString();
     content = (
-      <React.Fragment>
-        <div id="searchInfo">{`Results of search for the city: ${city}`}</div>
-        <div id="time">{`Requested at: ${date}`}</div>
-        <div id="temp">
-          {`Actual temperature is: ${Math.round(temp)}`} &#176;C
-        </div>
-        <div id="sunrise">{`Sunrise is today at: ${sunriseTime}`}</div>
-        <div id="sunset">{`Sunrise is today at: ${sunsetTime}`}</div>
-        <div id="wind">{`Velocity of the wind is: ${wind} m/s`}</div>
-        <div id="pressure">{`Pressure of air is: ${pressure} hPa`}</div>
-      </React.Fragment>
+      <Card style={{ color: "black" }}>
+        <Card.Body className="center">
+          <Card.Title>Weather</Card.Title>
+          <Card.Text>{`Results of search for the city: ${city}`}</Card.Text>
+          <Card.Text>{`Requested at: ${date}`}</Card.Text>
+          <Card.Text>
+            {`Actual temperature is: ${Math.round(temp)}`} &#176;C
+          </Card.Text>
+          <Card.Text>{`Sunrise is today at: ${sunriseTime}`}</Card.Text>
+          <Card.Text>{`Sunset is today at: ${sunsetTime}`}</Card.Text>
+          <Card.Text>{`Velocity of the wind is: ${wind} m/s`}</Card.Text>
+          <Card.Text>{`Pressure of air is: ${pressure} hPa`}</Card.Text>
+        </Card.Body>
+      </Card>
     );
   }
 
   return (
     <div id="results" className="center">
-      {err ? `Can't find ${city} in database` : content}
+      {err ? (
+        <Alert variant="danger">{`Can't find ${city} in database`}</Alert>
+      ) : (
+        content
+      )}
     </div> // short if statement to check err state is false or not
   );
 };
