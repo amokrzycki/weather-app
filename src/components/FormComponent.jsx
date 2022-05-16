@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const FormComponent = (props) => {
   return (
     <Form onSubmit={props.search} id="searchForm" className="center">
-      <Form.Label className="text-white">{`${props.label}`}</Form.Label>
+      <Form.Label className="text-white">{`${props.label ? "Description of weather: " + props.label[0].description : "Provide City"}`}</Form.Label>
       <Form.Control
         type="text"
         value={props.value}
