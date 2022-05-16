@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "../Header";
-import Weather from "../Weather";
+import Weather from "../Weather/Weather";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 
