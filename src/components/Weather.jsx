@@ -3,10 +3,13 @@ import FormComponent from "./FormComponent";
 import Result from "./Result/Result";
 
 const Weather = () => {
+  // hook states
   const [inputCity, setInputCity] = useState("");
   const [data, setData] = useState({});
+
   const getWeatherData = (city) => {
     handleCityInputError(city);
+    //getting APIKEY from local .JSON
     fetch(`./data.json`, {
       headers: {
         // setting properly content type to get APIKEY from JSON
@@ -14,13 +17,16 @@ const Weather = () => {
         Accept: "application/json",
       },
     })
+      // checking response status is ok
       .then(handleApiKeyFetchError)
       .then((response) => {
         return response.json();
       })
       .then((key) => {
         const APIKEY = JSON.parse(JSON.stringify(key.key));
+        //API URL
         const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}&units=metric`;
+        //getting API data
         fetch(apiURL)
           .then((response) => {
             if (!response.ok) {
@@ -30,6 +36,7 @@ const Weather = () => {
           })
           .then((response) => response.json())
           .then((data) => {
+            // set the app data state to the data retrieved from the API
             setData(data);
           })
           .catch((err) => {
@@ -37,6 +44,7 @@ const Weather = () => {
           });
       });
   };
+  // error handler for incorrect or empty string  provide
   const handleCityInputError = (c) => {
     if (!c || c === "") {
       throw Error("Provide city!");
@@ -49,12 +57,12 @@ const Weather = () => {
     }
     return response;
   };
-
+  // handler of searching weather
   const handleSearch = (e) => {
     e.preventDefault();
     getWeatherData(inputCity);
   };
-
+  // handler of changes in text input
   const handleInput = (e) => {
     setInputCity(e.target.value);
   };
@@ -74,7 +82,6 @@ const Weather = () => {
         wind={data?.wind?.speed}
         sunrise={data?.sys?.sunrise}
         sunset={data?.sys?.sunset}
-        result={data}
       />
     </div>
   );

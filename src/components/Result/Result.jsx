@@ -8,6 +8,7 @@ const Result = (p) => {
   const sunsetTime = new Date(p.sunset * 1000).toLocaleTimeString();
   const requestDate = new Date().toLocaleString();
   let content = null;
+  // if we don't fetched any data don't display results card div
   if (p.temp !== undefined) {
     content = (
       <Card style={{ color: "black" }}>
