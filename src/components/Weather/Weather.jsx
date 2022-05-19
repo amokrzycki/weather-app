@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FormComponent from "../FormComponent";
-import ForecastResult from "./ForecastResult";
-import WeatherResult from "./WeatherResult";
+import WeatherResults from "./WeatherResults";
 
 const Weather = () => {
   // hook states
@@ -10,49 +9,10 @@ const Weather = () => {
   const [forecastData, setForecastData] = useState({});
   const [alertText, setAlertText] = useState("");
   const [error = false, setError] = useState(Boolean);
-
-  const getForecastData = (city) => {
-    handleCityInputError(city);
-    //getting APIKEY from local .JSON
-    fetch(`./data.json`, {
-      headers: {
-        // setting properly content type to get APIKEY from JSON
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      // checking response status is ok
-      .then(handleApiKeyFetchError)
-      .then((response) => {
-        return response.json();
-      })
-      .then((key) => {
-        const APIKEY = JSON.parse(JSON.stringify(key.key));
-        //API URL
-        const apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=50.0413&lon=21.999&exclude=hourly,minutely&appid=${APIKEY}&units=metric`;
-        //getting API data
-        fetch(apiURL)
-          .then((response) => {
-            if (!response.ok) {
-              throw Error(`Can't fetch weather for ${city}!`);
-            }
-            return response;
-          })
-          .then((response) => response.json())
-          .then((data) => {
-            // set the app data state to the data retrieved from the API
-            setForecastData(data);
-            setError(false);
-          })
-          .catch((err) => {
-            console.log(err);
-            setAlertText(err);
-            setError(true);
-          });
-      });
-  };
+  let APIKEY = "";
 
   const getWeatherData = (city) => {
+    // handling of not properly city string
     handleCityInputError(city);
     //getting APIKEY from local .JSON
     fetch(`./data.json`, {
@@ -68,31 +28,49 @@ const Weather = () => {
         return response.json();
       })
       .then((key) => {
-        const APIKEY = JSON.parse(JSON.stringify(key.key));
+        // setting APIKEY
+        APIKEY = JSON.parse(JSON.stringify(key.key));
         //API URL
         const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}&units=metric`;
-        //getting API data
-        fetch(apiURL)
-          .then((response) => {
-            if (!response.ok) {
-              throw Error(`Can't fetch weather for ${city}!`);
-            }
-            return response;
-          })
-          .then((response) => response.json())
-          .then((data) => {
-            // set the app data state to the data retrieved from the API
-            setData(data);
-            setError(false);
-          })
-          .catch((err) => {
-            console.log(err);
-            setAlertText(err);
-            setError(true);
-          });
+        // returning fetch to create promise
+        return fetch(apiURL);
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`Can't fetch weather for ${city}!`);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        // set the app data state to the data retrieved from the API
+        setData(data);
+        // if we fetched data correctly set error state to false
+        setError(false);
+        const apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data?.coord?.lat}&lon=${data?.coord?.lon}&exclude=hourly,minutely&appid=${APIKEY}&units=metric`;
+        // returning fetch to create promise
+        return fetch(apiURL);
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`Can't fetch forecast for ${city}!`);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        // set the app data state to the data retrieved from the API
+        setForecastData(data);
+        // if we fetched data correctly set error state to false
+        setError(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setAlertText(err);
+        setError(true);
       });
   };
-  // error handler for incorrect or empty string  provide
+  // error handler for incorrect or empty string provide
   const handleCityInputError = (c) => {
     if (!c || c === "") {
       setAlertText("Provide city!");
@@ -113,7 +91,6 @@ const Weather = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     getWeatherData(inputCity);
-    getForecastData(inputCity);
   };
   // handler of changes in text input
   const handleInput = (e) => {
@@ -121,14 +98,14 @@ const Weather = () => {
   };
 
   return (
-    <div id="wrapper">
+    <div id="wrapper" className="vw-100">
       <FormComponent
         value={inputCity}
         change={handleInput}
         search={handleSearch}
         label={data?.weather}
       />
-      <WeatherResult
+      <WeatherResults
         temp={data?.main?.temp}
         city={data?.name}
         feelsLike={data?.main?.feels_like}
@@ -137,11 +114,7 @@ const Weather = () => {
         sunset={data?.sys?.sunset}
         alertText={alertText}
         error={error}
-      />
-      <ForecastResult
         forecast={forecastData}
-        error={error}
-        alertText={alertText}
       />
     </div>
   );
