@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FormComponent from "../FormComponent";
+import ForecastResult from "./ForecastResult";
 import WeatherResult from "./WeatherResult";
 
 const Weather = () => {
@@ -28,7 +29,7 @@ const Weather = () => {
       .then((key) => {
         const APIKEY = JSON.parse(JSON.stringify(key.key));
         //API URL
-        const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKEY}&units=metric`;
+        const apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=50.0413&lon=21.999&exclude=hourly,minutely&appid=${APIKEY}&units=metric`;
         //getting API data
         fetch(apiURL)
           .then((response) => {
@@ -113,7 +114,6 @@ const Weather = () => {
     e.preventDefault();
     getWeatherData(inputCity);
     getForecastData(inputCity);
-    console.log(forecastData);
   };
   // handler of changes in text input
   const handleInput = (e) => {
@@ -137,6 +137,11 @@ const Weather = () => {
         sunset={data?.sys?.sunset}
         alertText={alertText}
         error={error}
+      />
+      <ForecastResult
+        forecast={forecastData}
+        error={error}
+        alertText={alertText}
       />
     </div>
   );
