@@ -5,8 +5,8 @@ import WeatherResults from "./WeatherResults";
 const Weather = () => {
   // hook states
   const [inputCity, setInputCity] = useState("");
-  const [data, setData] = useState({});
-  const [forecastData, setForecastData] = useState({});
+  const [weatherData, setWeatherData] = useState({});
+  const [coordinates, setCoordinates] = useState({});
   const [alertText, setAlertText] = useState("");
   const [error = false, setError] = useState(Boolean);
   let APIKEY = "";
@@ -31,7 +31,23 @@ const Weather = () => {
         // setting APIKEY
         APIKEY = JSON.parse(JSON.stringify(key.key));
         //API URL
-        const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}&units=metric`;
+        const apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKEY}`;
+        // returning fetch to create promise
+        return fetch(apiURL);
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(`Can't fetch coordinates for ${city}!`);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        // set the state to coordinates of searched city to the data retrieved from the API
+        setCoordinates(data);
+        // if we fetched data correctly set error state to false
+        setError(false);
+        const apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data[0]?.lat}&lon=${data[0]?.lon}&exclude=hourly,minutely&appid=${APIKEY}&units=metric`;
         // returning fetch to create promise
         return fetch(apiURL);
       })
@@ -44,23 +60,7 @@ const Weather = () => {
       .then((response) => response.json())
       .then((data) => {
         // set the app data state to the data retrieved from the API
-        setData(data);
-        // if we fetched data correctly set error state to false
-        setError(false);
-        const apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${data?.coord?.lat}&lon=${data?.coord?.lon}&exclude=hourly,minutely&appid=${APIKEY}&units=metric`;
-        // returning fetch to create promise
-        return fetch(apiURL);
-      })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(`Can't fetch forecast for ${city}!`);
-        }
-        return response;
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        // set the app data state to the data retrieved from the API
-        setForecastData(data);
+        setWeatherData(data);
         // if we fetched data correctly set error state to false
         setError(false);
       })
@@ -103,18 +103,18 @@ const Weather = () => {
         value={inputCity}
         change={handleInput}
         search={handleSearch}
-        label={data?.weather}
+        label={weatherData?.current?.weather[0]?.description}
       />
       <WeatherResults
-        temp={data?.main?.temp}
-        city={data?.name}
-        feelsLike={data?.main?.feels_like}
-        wind={data?.wind?.speed}
-        sunrise={data?.sys?.sunrise}
-        sunset={data?.sys?.sunset}
+        temp={weatherData?.current?.temp}
+        city={coordinates[0]?.name}
+        feelsLike={weatherData?.current?.feels_like}
+        wind={weatherData?.current?.wind_speed}
+        sunrise={weatherData?.current?.sunrise}
+        sunset={weatherData?.current?.sunset}
         alertText={alertText}
         error={error}
-        forecast={forecastData}
+        forecast={weatherData}
       />
     </div>
   );

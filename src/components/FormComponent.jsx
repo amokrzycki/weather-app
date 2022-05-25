@@ -6,9 +6,7 @@ const FormComponent = (props) => {
   return (
     <Form onSubmit={props.search} id="searchForm" className="center">
       <Form.Label className="text-white">{`${
-        props.label
-          ? "Description of weather: " + props.label[0].description
-          : "Provide City"
+        props.label ? "Description of weather: " + props.label : "Provide City"
       }`}</Form.Label>
       <Form.Control
         type="text"

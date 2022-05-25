@@ -1,6 +1,7 @@
 import React from "react";
 import "./WeatherResults.css";
 import { Card, Alert } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const ForecastResult = (p) => {
   const sunriseTime = new Date(p.sunrise * 1000).toLocaleTimeString(); // unix time sended by API have lack of three zeros, we need to multiplicate it by 1000
@@ -56,8 +57,15 @@ const ForecastResult = (p) => {
   }
 
   return (
-    <div id="results" className="d-flex flex-column">
-      {p.error ? <Alert variant="danger">{`${p.alertText}`}</Alert> : content}
+    <div id="results" className="d-flex flex-column align-items-center">
+      {p.error ? (
+        <Alert
+          variant="danger"
+          className="w-25 text-center"
+        >{`${p.alertText}`}</Alert>
+      ) : (
+        content
+      )}
     </div>
   );
 };
