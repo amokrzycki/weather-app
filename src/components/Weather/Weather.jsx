@@ -98,7 +98,7 @@ const Weather = () => {
   };
 
   return (
-    <div id="wrapper" className="d-flex vw-100 vh-100">
+    <div id="wrapper" className="d-flex w-75 h-100">
       <FormComponent
         value={inputCity}
         change={handleInput}

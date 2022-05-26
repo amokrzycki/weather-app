@@ -32,6 +32,13 @@
 
 .searchStyles {
     z-index: 10;
-    margin-left: -2.5rem;
+    margin-left: -4rem;
     visibility: initial !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
 }

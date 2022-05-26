@@ -1,7 +1,21 @@
-#results {
-    padding-top: 10px;
-}
-
 .card-body>p {
     margin: 0;
+}
+
+.bgResults {
+    background-color: #f2f3f7;
+}
+
+.noData {
+    color: rgb(209 213 219);
+}
+
+.todayWeather {
+    color: rgb(33, 36, 39);
+}
+
+#wrapper {
+    background-color: rgb(243 244 246);
+    border-radius: 2.5rem;
+    overflow: hidden;
 }

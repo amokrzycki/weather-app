@@ -7,7 +7,11 @@ const ForecastResult = (p) => {
   const sunriseTime = new Date(p.sunrise * 1000).toLocaleTimeString(); // unix time sended by API have lack of three zeros, we need to multiplicate it by 1000
   const sunsetTime = new Date(p.sunset * 1000).toLocaleTimeString();
   const requestDate = new Date().toLocaleString();
-  let content = null;
+  let content = (
+    <div className="p-4 d-flex align-items-center justify-content-center h-25 mb-auto">
+      <h1 className="noData display-6 fw-bold text-uppercase">No Data Yet</h1>
+    </div>
+  );
   const forecastElements = [];
   let keyArr = 0;
   // if we don't fetched any data don't display results card div
@@ -20,7 +24,6 @@ const ForecastResult = (p) => {
             src={`http://openweathermap.org/img/wn/${e.weather[0].icon}@2x.png`}
           />
           <Card.Body>
-            <Card.Text>{`Temp min: ${e.temp.min}`}</Card.Text>
             <Card.Text>{`Temp max: ${e.temp.max}`}</Card.Text>
           </Card.Body>
         </Card>
@@ -29,7 +32,8 @@ const ForecastResult = (p) => {
 
     content = (
       <React.Fragment>
-        <div className="actualWeatherWrapper d-flex justify-content-center mb-5">
+        <div className="actualWeatherWrapper d-flex flex-column my-5 w-100 p-3">
+          <h1 className="todayWeather display-5 fw-bold mt-auto mb-4">Today</h1>
           <div className="actualWeather">
             <Card style={{ color: "black" }}>
               <Card.Body className="center">
@@ -59,7 +63,7 @@ const ForecastResult = (p) => {
   return (
     <div
       id="results"
-      className="d-flex flex-column align-items-center justify-content-center w-50"
+      className="d-flex flex-column align-items-center justify-content-center w-50 bgResults h-100"
     >
       {p.error ? (
         <Alert
