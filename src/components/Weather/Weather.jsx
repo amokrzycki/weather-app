@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FormComponent from "../FormComponent";
+import FormComponent from "../Form/FormComponent";
 import WeatherResults from "./WeatherResults";
 
 const Weather = () => {
@@ -98,7 +98,7 @@ const Weather = () => {
   };
 
   return (
-    <div id="wrapper" className="vw-100">
+    <div id="wrapper" className="d-flex vw-100 vh-100">
       <FormComponent
         value={inputCity}
         change={handleInput}

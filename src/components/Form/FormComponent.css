@@ -1,0 +1,37 @@
+.background {
+    background-image: url("https://i.imgur.com/yGvrZR1.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.label {
+    font-size: 1.5rem;
+}
+
+.dash {
+    height: 0.25rem !important;
+    border-radius: 9999px;
+    opacity: 1 !important;
+}
+
+.holder::placeholder {
+    color: #edf2f7;
+}
+
+.holder {
+    background: rgba(226, 232, 240, 0.6) !important;
+    border: unset !important;
+    outline: unset !important;
+}
+
+.buttonStyles {
+    z-index: 10;
+    border: unset !important;
+    visibility: hidden;
+}
+
+.searchStyles {
+    z-index: 10;
+    margin-left: -2.5rem;
+    visibility: initial !important;
+}

@@ -57,7 +57,10 @@ const ForecastResult = (p) => {
   }
 
   return (
-    <div id="results" className="d-flex flex-column align-items-center">
+    <div
+      id="results"
+      className="d-flex flex-column align-items-center justify-content-center w-50"
+    >
       {p.error ? (
         <Alert
           variant="danger"
