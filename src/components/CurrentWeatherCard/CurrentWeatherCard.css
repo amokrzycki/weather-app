@@ -1,0 +1,39 @@
+.iconStyles {
+    letter-spacing: 0.1em;
+    color: rgb(31 41 55);
+}
+
+.tempStyles {
+    color: rgb(157 23 77);
+}
+
+.dateStyle {
+    letter-spacing: 0.05em;
+}
+
+.descStyle {
+    color: rgb(156 163 175);
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+.infoStyles {
+    border-left-width: 2px;
+    border-color: rgb(243 244 246);
+}
+
+.infoText {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: rgb(156 163 175);
+    margin-bottom: 0px !important;
+}
+
+.pStyles>p {
+    margin-bottom: 0px !important;
+}
+
+.my-auto.pStyles,
+.my-2.infoStyles.p-2.my-2.infoStyles.p-2 {
+    width: 33%;
+}

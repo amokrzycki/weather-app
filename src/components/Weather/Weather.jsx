@@ -106,15 +106,10 @@ const Weather = () => {
         label={weatherData?.current?.weather[0]?.description}
       />
       <WeatherResults
-        temp={weatherData?.current?.temp}
-        city={coordinates[0]?.name}
-        feelsLike={weatherData?.current?.feels_like}
-        wind={weatherData?.current?.wind_speed}
-        sunrise={weatherData?.current?.sunrise}
-        sunset={weatherData?.current?.sunset}
         alertText={alertText}
         error={error}
         forecast={weatherData}
+        coordinates={coordinates}
       />
     </div>
   );
