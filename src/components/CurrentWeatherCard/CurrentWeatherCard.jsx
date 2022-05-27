@@ -2,7 +2,6 @@ import React from "react";
 import "../CurrentWeatherCard/CurrentWeatherCard.css";
 function CurrentWeatherCard({ data }) {
   const { temp, weather, feels_like, humidity } = data?.current;
-  console.log(data);
   const options = {
     weekday: "long",
     month: "short",
@@ -18,9 +17,7 @@ function CurrentWeatherCard({ data }) {
         />
       </div>
       <div className="my-auto pStyles">
-        <p className="fw-bold display-5 tempStyles">
-          {Math.round(temp)}&#176;C
-        </p>
+        <p className="fw-bold display-5 tempStyles">{Math.round(temp)}&deg;C</p>
         <p className="display-6 iconStyles">{weather[0].main}</p>
         <p className="descStyle text-xs text-uppercase">
           {weather[0].description}

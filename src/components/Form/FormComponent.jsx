@@ -17,7 +17,7 @@ const FormComponent = (props) => {
           placeholder="Enter location"
           onChange={props.change}
           id="citySearch"
-          className="position-relative rounded-pill px-3 py-2 w-75 holder my-2 text-white"
+          className="position-relative rounded-pill px-3 py-2 w-75 holder my-2 text-black"
         />
         <button type="submit" className="buttonStyles">
           <i
