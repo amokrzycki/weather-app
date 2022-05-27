@@ -9,8 +9,8 @@ function CurrentWeatherCard({ data }) {
   };
   const requestDate = new Date().toLocaleString("EN-en", options);
   return (
-    <div className="w-100 p-3 d-flex align-items-center justify-content-center shadow-lg rounded-2 bg-white h-50 mb-auto">
-      <div className="mx-auto">
+    <div className="w-100 p-3 d-flex align-items-center justify-content-center shadow-lg rounded-2 bg-white mb-auto currentWeather">
+      <div className="mx-auto weatherIcon">
         <img
           src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
           alt="Weather Icon"

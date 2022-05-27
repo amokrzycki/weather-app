@@ -4,7 +4,7 @@ import "../ForecastCard/ForecastCard.css";
 function ForecastCard({ day }) {
   return (
     <li className="p-3 d-flex align-items-center justify-content-center rounded-3 my-auto listStyles">
-      <div className="my-auto">
+      <div className="my-auto forecastInfo">
         <p className="fw-bold tempStyles mb-2">
           {Math.round(day.temp.max)}&deg;C
         </p>

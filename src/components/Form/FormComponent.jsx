@@ -18,6 +18,7 @@ const FormComponent = (props) => {
           onChange={props.change}
           id="citySearch"
           className="position-relative rounded-pill px-3 py-2 w-75 holder my-2 text-black"
+          maxLength="30"
         />
         <button type="submit" className="buttonStyles">
           <i
