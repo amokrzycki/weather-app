@@ -27,7 +27,7 @@ const ForecastResult = (p) => {
         <div className="d-flex flex-column">
           <h1 className="todayWeather display-5 fw-bold mt-auto mb-4">Today</h1>
           <CurrentWeatherCard data={p.forecast} />
-          <h1 className="display-6 todayWeather mb-3 mt-5">
+          <h1 className="display-6 forecastWeather mb-3 mt-5">
             More on {p.coordinates[0].name}, {p.coordinates[0].country}
           </h1>
           <ul className="forecastStyles">{forecastElements}</ul>

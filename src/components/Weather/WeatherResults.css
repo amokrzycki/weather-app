@@ -21,6 +21,10 @@
     color: rgb(33, 36, 39);
 }
 
+.forecastWeather {
+    color: rgb(33, 36, 39);
+}
+
 #wrapper {
     background-color: rgb(243 244 246);
     border-radius: 2.5rem;
