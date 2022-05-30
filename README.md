@@ -18,5 +18,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### App UI (waiting for mobile view 😴)
+### App UI
 ![alt text](https://github.com/Sajson/weather-app/blob/main/UI_appearance.png?raw=true)
+
+### Mobile UI
+<p align="center">
+  <img src="https://github.com/Sajson/weather-app/blob/main/mobile_view_appearance.png?raw=true">
+</p>
