@@ -1,4 +1,4 @@
-# Getting Started with Weather App
+# App is hosted [here](https://sajson.github.io/weather-app) 😉
 
 ## Available Scripts
 
@@ -18,5 +18,5 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-### App UI
+### App UI (waiting for mobile view 😴)
 ![alt text](https://github.com/Sajson/weather-app/blob/main/UI_appearance.png?raw=true)
