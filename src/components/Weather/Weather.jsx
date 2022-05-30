@@ -9,32 +9,15 @@ const Weather = () => {
   const [coordinates, setCoordinates] = useState({});
   const [alertText, setAlertText] = useState("");
   const [error = false, setError] = useState(Boolean);
-  let APIKEY = "";
+  let APIKEY = "73b843df80ccb7a8b9dc0f23b13c9b75";
 
   const getWeatherData = (city) => {
+    const apiURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKEY}`;
     // handling of not properly city string
     handleCityInputError(city);
     //getting APIKEY from local .JSON
-    fetch(`./data.json`, {
-      headers: {
-        // setting properly content type to get APIKEY from JSON
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
+    fetch(apiURL)
       // checking response status is ok
-      .then(handleApiKeyFetchError)
-      .then((response) => {
-        return response.json();
-      })
-      .then((key) => {
-        // setting APIKEY
-        APIKEY = JSON.parse(JSON.stringify(key.key));
-        //API URL
-        const apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKEY}`;
-        // returning fetch to create promise
-        return fetch(apiURL);
-      })
       .then((response) => {
         if (!response.ok) {
           throw Error(`Can't fetch coordinates for ${city}!`);
@@ -77,15 +60,6 @@ const Weather = () => {
       setError(true);
       throw Error("Provide city!");
     }
-  };
-  // error Hanlder for APIKEY getting
-  const handleApiKeyFetchError = (response) => {
-    if (!response.ok) {
-      setAlertText("Api key not fetched!");
-      setError(true);
-      throw Error(response.statusText);
-    }
-    return response;
   };
   // handler of searching weather
   const handleSearch = (e) => {
