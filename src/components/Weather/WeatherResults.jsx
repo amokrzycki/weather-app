@@ -1,15 +1,10 @@
 import React from "react";
 import "./WeatherResults.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import CurrentWeatherCard from "../CurrentWeatherCard/CurrentWeatherCard";
 import ForecastCard from "../ForecastCard/ForecastCard";
+import Result from "../Result/Result";
 
 const ForecastResult = (p) => {
-  let content = (
-    <div className="p-4 d-flex align-items-center justify-content-center h-25 mb-auto">
-      <h1 className="noData display-6 fw-bold text-uppercase">No Data Yet</h1>
-    </div>
-  );
   const forecastElements = [];
   // if we don't fetched any data don't display results card div
   if (
@@ -22,18 +17,6 @@ const ForecastResult = (p) => {
         <ForecastCard day={p.forecast.daily[i]} key={i - 1} />
       );
     }
-    content = (
-      <React.Fragment>
-        <div className="d-flex flex-column">
-          <h1 className="todayWeather display-5 fw-bold mt-auto mb-4">Today</h1>
-          <CurrentWeatherCard data={p.forecast} />
-          <h1 className="display-6 forecastWeather mb-3 mt-5">
-            More on {p.coordinates[0].name}, {p.coordinates[0].country}
-          </h1>
-          <ul className="forecastStyles">{forecastElements}</ul>
-        </div>
-      </React.Fragment>
-    );
   }
 
   return (
@@ -42,8 +25,19 @@ const ForecastResult = (p) => {
         <div className="p-4 d-flex align-items-center justify-content-center h-25 mb-auto text-center">
           <h1 className="errorStyle display-6 fw-bold text-uppercase">{`${p.alertText}`}</h1>
         </div>
+      ) : p.forecast.daily === undefined ? (
+        <div className="p-4 d-flex align-items-center justify-content-center h-25 mb-auto">
+          <h1 className="noData display-6 fw-bold text-uppercase">
+            No Data Yet
+          </h1>
+        </div>
       ) : (
-        content
+        <Result
+          city={p.coordinates[0].name}
+          country={p.coordinates[0].country}
+          tiles={forecastElements}
+          forecast={p.forecast}
+        />
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import "../CurrentWeatherCard/CurrentWeatherCard.css";
+
 function CurrentWeatherCard({ data }) {
   const { temp, weather, feels_like, humidity } = data?.current;
   const options = {
@@ -7,7 +8,9 @@ function CurrentWeatherCard({ data }) {
     month: "short",
     year: "numeric",
   };
+
   const requestDate = new Date().toLocaleString("EN-en", options);
+
   return (
     <div className="w-100 p-3 d-flex align-items-center justify-content-center shadow-lg rounded-2 bg-white mb-auto currentWeather">
       <div className="mx-auto weatherIcon">

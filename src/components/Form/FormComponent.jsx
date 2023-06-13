@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./FormComponent.css";
+
 const FormComponent = (props) => {
   return (
     <div className="form-wrapper d-flex flex-column align-items-center justify-content-center w-50 background">
