@@ -1,0 +1,25 @@
+.searchBarWrapper {
+    display: flex;
+    height: 5%;
+    width: 65%;
+    background: rgb(32, 43, 59);
+    border-radius: 1em;
+}
+
+.searchBarInput {
+    width: 100%;
+    padding: 1em;
+    border: none;
+    border-radius: 1em;
+    background: rgb(32, 43, 59);
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+.searchBarInput::placeholder {
+    color: white;
+}
+
+.searchBarInput:focus {
+    outline: none;
+}

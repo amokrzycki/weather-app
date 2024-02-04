@@ -1,7 +1,13 @@
+import styles from "./SearchBar.module.css";
+
 const SearchBar = () => {
   return (
-    <div className="search-bar">
-      <input type="text" placeholder="Search..." />
+    <div className={styles.searchBarWrapper}>
+      <input
+        className={styles.searchBarInput}
+        type="text"
+        placeholder="Search for cities"
+      />
     </div>
   );
 };

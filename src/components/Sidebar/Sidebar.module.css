@@ -1,0 +1,29 @@
+.sidebarWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 5%;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: rgb(32, 43, 59);
+    border-radius: 1.5em;
+    margin: 2em;
+}
+
+.menuWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3em;
+}
+
+.menuItem {
+    flex-direction: column;
+    border-radius: 1em !important;
+    text-transform: unset !important;
+}
+
+.menuItem span {
+    margin: 0;
+}

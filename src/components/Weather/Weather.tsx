@@ -1,8 +1,10 @@
+import { Box } from "@mui/system";
+
 const Weather = () => {
   return (
-    <div>
+    <Box>
       <h1>Weather</h1>
-    </div>
+    </Box>
   );
 };
 
