@@ -1,4 +1,4 @@
-# App is hosted [here](https://sajson.github.io/weather-app) 😉
+# App is hosted [here](https://amokrzycki.github.io/weather-app) 😉
 
 ## Available Scripts
 
